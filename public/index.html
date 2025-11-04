@@ -2,31 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="description" content="Personal Assistant for Infinix P55 5G">
     <link rel="stylesheet" href="./style.css" type="text/css" />
-    <title>Home Page</title>
+    <link rel="manifest" href="./manifest.json">
+    <title>Personal Assistant</title>
 </head>
 <body>
-    <h1>Hi student, Welcome to XYZ University!</h1>
-    <p>You can sign up to the platform to access all important notes & lectures.</p>
+    <!-- Header -->
+    <header class="header">
+        <h1>🤖 My Assistant</h1>
+        <button id="voiceBtn" class="voice-btn" title="Voice Command">🎤</button>
+    </header>
 
-    <form action="/addUser" method="POST" target="_blank" id="signupForm">
-        <div class="field">
-            <label for="email">Email: </label>
-            <input type="text" placeholder="jane@email.com" name="email">
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-tab" data-tab="tasks">Tasks</button>
+        <button class="nav-tab" data-tab="reminders">Reminders</button>
+        <button class="nav-tab" data-tab="notes">Notes</button>
+    </nav>
+
+    <!-- Dashboard Tab -->
+    <div id="dashboard" class="tab-content active">
+        <div class="dashboard-grid">
+            <div class="card">
+                <h2>📋 Today's Tasks</h2>
+                <div id="dashboardTasks" class="dashboard-list">
+                    <p class="empty-state">No tasks for today</p>
+                </div>
+            </div>
+            <div class="card">
+                <h2>⏰ Upcoming Reminders</h2>
+                <div id="dashboardReminders" class="dashboard-list">
+                    <p class="empty-state">No upcoming reminders</p>
+                </div>
+            </div>
+            <div class="card">
+                <h2>📝 Recent Notes</h2>
+                <div id="dashboardNotes" class="dashboard-list">
+                    <p class="empty-state">No notes yet</p>
+                </div>
+            </div>
+            <div class="card quick-actions">
+                <h2>⚡ Quick Actions</h2>
+                <button class="action-btn" onclick="showAddTask()">➕ Add Task</button>
+                <button class="action-btn" onclick="showAddReminder()">⏰ Add Reminder</button>
+                <button class="action-btn" onclick="showAddNote()">📝 Add Note</button>
+            </div>
         </div>
-        <div class="field">    
-        <label for="username">Username: </label>
-            <input type="text" placeholder="Jane Doe" name="username">
+    </div>
+
+    <!-- Tasks Tab -->
+    <div id="tasks" class="tab-content">
+        <div class="section-header">
+            <h2>📋 My Tasks</h2>
+            <button class="add-btn" onclick="showAddTask()">+ Add</button>
         </div>
-        <div class="field">
-            <label for="password">Password: </label>
-            <input type="password" placeholder="password" name="password">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
         </div>
-        
-        <button id="formBtn">Create Account</button>
-        
-    </form>
+        <div id="tasksList" class="items-list"></div>
+    </div>
+
+    <!-- Reminders Tab -->
+    <div id="reminders" class="tab-content">
+        <div class="section-header">
+            <h2>⏰ My Reminders</h2>
+            <button class="add-btn" onclick="showAddReminder()">+ Add</button>
+        </div>
+        <div id="remindersList" class="items-list"></div>
+    </div>
+
+    <!-- Notes Tab -->
+    <div id="notes" class="tab-content">
+        <div class="section-header">
+            <h2>📝 My Notes</h2>
+            <button class="add-btn" onclick="showAddNote()">+ Add</button>
+        </div>
+        <div id="notesList" class="items-list"></div>
+    </div>
+
+    <!-- Modal for Adding/Editing -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Voice Feedback -->
+    <div id="voiceFeedback" class="voice-feedback"></div>
+
+    <script src="./app.js"></script>
 </body>
-
 </html>
